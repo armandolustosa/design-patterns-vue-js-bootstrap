@@ -2,7 +2,9 @@
   <div>
     <Header></Header>
 
-    <router-view></router-view>
+    <div class="min-vh-100">
+      <router-view></router-view>
+    </div>
 
     <Footer></Footer>
   </div>
@@ -19,8 +21,4 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
-div.container > img {
-  width: 100%;
-}
-</style>
+<style scoped></style>

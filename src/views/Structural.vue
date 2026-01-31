@@ -1,6 +1,6 @@
 <template>
   <NavBar textNavBar="Padrões Estruturais"></NavBar>
-  <Cards :padroes="padroes"></Cards>
+  <Cards :padroes="padroesExibidos"></Cards>
 </template>
 
 <script lang="ts">
@@ -8,28 +8,27 @@ import { defineComponent } from 'vue'
 import Cards from '@/components/Cards.vue'
 import type { ICard } from '@/interfaces/ICard.ts'
 import NavBar from '@/components/NavBar.vue'
+import { useGerenciaPesquisa } from '@/store/GerenciaPesquisa.ts'
 
 export default defineComponent({
   name: 'structural',
   components: { NavBar, Cards },
+  computed: {
+    store() {
+      return useGerenciaPesquisa()
+    },
+
+    padroesExibidos() {
+      return this.store.filtrarPadroes
+    },
+  },
   data() {
     return {
       padroes: [] as ICard[],
     }
   },
-  methods: {
-    async buscarPadroes(): Promise<void> {
-      try {
-        const response = await fetch('http://localhost:3000/estruturais')
-        const data = await response.json()
-        this.padroes = data
-      } catch (error) {
-        console.error('Erro ao buscar padrões:', error)
-      }
-    },
-  },
-  created() {
-    this.buscarPadroes()
+  async created() {
+    await this.store.buscarPadroes('estruturais')
   },
 })
 </script>

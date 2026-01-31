@@ -6,7 +6,7 @@
         Home
       </h5>
     </router-link>
-    <h1 class="fw-bold mt-3 mx-auto text-center mt-lg-0">{{ textNavBar }}</h1>
+    <h1 class="fw-bold mt-3 mt-sm-0 mx-auto text-center mt-lg-0">{{ textNavBar }}</h1>
     <PesquisarPadrao @emitirPesquisa="pesquisarPadroes" class="mx-auto mx-xll-2"></PesquisarPadrao>
   </nav>
 </template>
@@ -14,7 +14,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import PesquisarPadrao from '@/components/PesquisarPadrao.vue'
-import type { ICard } from '@/interfaces/ICard.ts'
+import { useGerenciaPesquisa } from '@/store/GerenciaPesquisa.ts'
 
 export default defineComponent({
   name: 'NavBar',
@@ -23,8 +23,9 @@ export default defineComponent({
     textNavBar: String,
   },
   methods: {
-    pesquisarPadroes(valorPesquisa): ICard {
-      console.log(valorPesquisa)
+    pesquisarPadroes(valorPesquisa: string): void {
+      const store = useGerenciaPesquisa();
+      store.alteraPesquisa(valorPesquisa);
     },
   },
 })

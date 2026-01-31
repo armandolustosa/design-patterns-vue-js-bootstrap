@@ -1,8 +1,9 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, START_LOCATION } from 'vue-router'
 import Creational from "@/views/Creational.vue";
 import Main from '@/components/Main.vue'
 import Structural from '@/views/Structural.vue'
 import Behavioral from '@/views/Behavioral.vue'
+import {useGerenciaPesquisa} from "@/store/GerenciaPesquisa.ts";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,15 @@ const router = createRouter({
       name: 'Behavioral',
     },
   ],
+})
+
+router.beforeEach((to, from) => {
+  if (from === START_LOCATION) return
+
+  if (to.path !== from.path) {
+    const store = useGerenciaPesquisa()
+    store.limparPesquisa()
+  }
 })
 
 export default router

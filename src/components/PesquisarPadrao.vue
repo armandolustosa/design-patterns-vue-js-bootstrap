@@ -8,10 +8,7 @@
         aria-label="Search"
         v-model="valorPesquisa"
       />
-      <button
-        @click="$emit('emitirPesquisa', valorPesquisa)"
-        class="btn btn-outline-success rounded-circle ms-2 my-2 my-sm-0"
-      >
+      <button class="btn btn-outline-success rounded-circle ms-2 my-2 my-sm-0">
         <i class="bi bi-search fw-bold"></i>
       </button>
     </div>
@@ -20,16 +17,23 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { useGerenciaPesquisa } from '@/store/GerenciaPesquisa.ts'
 
 export default defineComponent({
   name: 'PesquisarPadrao',
   props: {
-    valorPesquisa: String
+    valorPesquisa: String,
+  },
+  watch: {
+    valorPesquisa() {
+      this.$emit('emitirPesquisa', this.valorPesquisa)
+    },
   },
   emits: ['emitirPesquisa'],
   data() {
+    const store = useGerenciaPesquisa()
     return {
-      valorPesquisa: '',
+      valorPesquisa: store.termoPesquisado ?? '',
     }
   },
 })
