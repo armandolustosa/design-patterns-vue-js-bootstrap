@@ -2,7 +2,7 @@
   <div v-if="padroes.length > 0">
     <div v-for="padrao in padroes" :key="padrao.id">
       <div
-        class="card m-4 rounded-4 bg-transparent border-success overflow-hidden shadow col-11 col-md-8 mx-auto"
+        class="card card-hover m-4 rounded-4 bg-transparent border-success overflow-hidden shadow col-11 col-md-8 mx-auto"
       >
         <h2 class="card-header text-white bg-success">{{ padrao.name }}</h2>
         <div class="card-body">
