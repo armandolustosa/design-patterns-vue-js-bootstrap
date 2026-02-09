@@ -142,7 +142,7 @@
         "name": "State",
         "description": "Permite que um objeto altere seu comportamento quando seu estado interno muda.",
         "example": "https://refactoring.guru/design-patterns/state/typescript/example#example-0",
-        "uml": "./../../public/diagram_structures/behavioural/estrutura-state"
+        "uml": "./../../public/diagram_structures/behavioural/estrutura-state.png"
       },
       {
         "id": 21,
